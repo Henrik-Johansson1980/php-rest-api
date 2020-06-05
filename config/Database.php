@@ -6,6 +6,8 @@
 
 namespace PHP_REST_API;
 
+use PDO;
+
 class Database
 {
     // Database Parameters
