@@ -6,7 +6,7 @@ use PDO;
 
 class Post
 {
-    // Database Connection and info
+    // Database Connection and table name.
     private $conn;
     private $table = 'posts';
 
@@ -170,6 +170,30 @@ class Post
         //Print error if something goes wrong.
         printf('Error: %s.\n', $stmt->error);
 
+        return false;
+    }
+
+    //Delete Post
+    public function delete()
+    {
+        //Create Delete Query
+        $query = "DELETE FROM $this->table WHERE id = :id";
+        //Prepare Statement
+        $stmt = $this->conn->prepare($query);
+        
+        //Clean input
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        //Bind parameters
+        $stmt->bindParam(':id', $this->id);
+
+        //Execute
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Print Error if something went wrong.
+        printf('Error: %s.\n', $stmt->error);
         return false;
     }
 }

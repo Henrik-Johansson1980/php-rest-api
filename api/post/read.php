@@ -15,23 +15,25 @@ include_once '../../models/Post.php';
 $database = new Database();
 $db = $database->connect();
 
-//Instantiate blog post object
+// Instantiate blog post object
 $post = new Post($db);
 
-//Blog Post Query
+// Blog Post Query
 $result = $post->read();
+
+// Get row count
 $num = $result->rowCount();
 
 // Check if there are any posts
-
 if ($num > 0) {
-    $posts_arr = array();
-    $posts_arr['data'] = array();
+    //Posts array
+    $postsArr = array();
+    $postsArr['data'] = array();
 
     while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
         extract($row);
 
-        $post_item = array(
+        $postItem = array(
             'id' => $id,
             'title' => $title,
             'body' => html_entity_decode($body),
@@ -41,11 +43,11 @@ if ($num > 0) {
         );
 
         // Push to data
-        array_push($posts_arr['data'], $post_item);
-
-        //Decode to JSON and output
-        echo json_encode($posts_arr);
+        array_push($postsArr['data'], $postItem);
     }
+
+    //Decode to JSON and output
+    echo json_encode($postsArr);
 } else {
     // No posts
     echo json_encode(
