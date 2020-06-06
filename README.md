@@ -3,6 +3,8 @@
 ## Introduction
 A basic CRUD REST API for a simple Blog. Written in PHP for practice purposes. The API let's you perform basic CRUD operations on the two tables available in the included myblog.sql file.
 
+![](preview.png)
+
 ## Project Setup
 You'll need some kind of XAMPP-stack or equivalent so that you can create the database for the project. You might also find it helpful to use Postman to send the requests.
 
