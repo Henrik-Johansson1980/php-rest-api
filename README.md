@@ -1,7 +1,7 @@
 # PHP REST API For a blog.
 
 ## Introduction
-A basic CRUD REST API for a simple Blog. Written in PHP for practice purposes. The API let's you perform basic CRUD operations on the two tables available in the included myblog.sql file.
+A basic CRUD REST API for a simple Blog. Written in PHP for practice purposes. The API let's you perform basic CRUD operations on the two tables available in the included myblog.sql file. This Project is based on the Traversy Media course: *PHP REST API from Scratch*.
 
 ![](preview.png)
 
