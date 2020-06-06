@@ -114,28 +114,28 @@ class Post
         $this->author = htmlspecialchars(strip_tags($this->author));
         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
 
-        //Bind Data
+        // Bind Data
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':body', $this->body);
         $stmt->bindParam(':author', $this->author);
         $stmt->bindParam(':category_id', $this->category_id);
 
 
-        //Execute Qurey
+        // Execute Qurey
         if ($stmt->execute()) {
             return true;
         }
 
-        //Print error if something goes wrong.
+        // Print error if something goes wrong.
         printf('Error: %s.\n', $stmt->error);
 
         return false;
     }
 
-    //Update Post
+    // Update Post
     public function update()
     {
-        // Create Insert Query (Uses Named params).
+        // Create Update Query (Uses Named params).
         $query = "UPDATE 
             $this->table
             SET
@@ -176,18 +176,19 @@ class Post
     //Delete Post
     public function delete()
     {
-        //Create Delete Query
+        //Create Delete Query.
         $query = "DELETE FROM $this->table WHERE id = :id";
-        //Prepare Statement
+        
+        //Prepare Statement.
         $stmt = $this->conn->prepare($query);
         
-        //Clean input
+        //Clean input.
         $this->id = htmlspecialchars(strip_tags($this->id));
 
-        //Bind parameters
+        //Bind parameters.
         $stmt->bindParam(':id', $this->id);
 
-        //Execute
+        // Execute Query.
         if ($stmt->execute()) {
             return true;
         }

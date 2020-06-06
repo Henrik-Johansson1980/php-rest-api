@@ -61,22 +61,74 @@ class Category
     // Create Category
     public function create()
     {
-        // Create th Insert Query
+        // Create th Insert Query.
         $query = "INSERT INTO $this->table SET name = :name";
 
         $stmt = $this->conn->prepare($query);
 
-        // Clean up
+        // Clean up data.
         $this->name = htmlspecialchars(strip_tags($this->name));
 
-        //Bind
+        //Bind.
         $stmt->bindParam(':name', $this->name);
 
         // Execute Query
         if ($stmt->execute()) {
             return true;
         }
-        // Print error if failed
+        // Print error if failed.
+        printf('Error: %s.\n', $stmt->error);
+        return false;
+    }
+
+    // Update Post
+    public function update()
+    {
+        // Update Query.
+        $query = "UPDATE $this->table SET name = :name WHERE id = :id";
+
+        $stmt = $this->conn->prepare($query);
+        
+        // Clean data before inserting
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $this->name = htmlspecialchars(strip_tags($this->name));
+
+        // Bind data
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':name', $this->name);
+
+        //Execute Qurey
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        //Print error if something goes wrong.
+        printf('Error: %s.\n', $stmt->error);
+
+        return false;
+    }
+
+    // Delete Category
+    public function delete()
+    {
+        // Delete Query.
+        $query = "DELETE FROM $this->table WHERE id = :id";
+
+        // Prepare Statement.
+        $stmt = $this->conn->prepare($query);
+
+        // Clean data
+        $this->id = htmlspecialchars(strip_tags($this->id));
+
+        // Bind parameter.
+        $stmt->bindParam(':id', $this->id);
+
+        // Execute Query.
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Print the error message if something goes wrong.
         printf('Error: %s.\n', $stmt->error);
         return false;
     }
